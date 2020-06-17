@@ -133,10 +133,10 @@ console.log(babyOne);
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Window/Global Object Binding: this points to windows object in global scope
+  2. Implicit Binding: the object to the left points to "this"
+  3. New binding: this points to the object is created on
+  4. Explicit binding: When I use call or apply method
 */
 
 
