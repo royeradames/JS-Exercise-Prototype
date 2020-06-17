@@ -46,7 +46,7 @@ function Person(name, age) {
 }
 
 Person.prototype.eat = function(edible){
-  if(this.stoomach.length < 10){
+  if(this.stomach.length < 10){
     this.stomach.push(edible);
   }
 }
@@ -81,9 +81,24 @@ personOne.eat('tacos');
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+
+Car.prototype.fill = function(gas){
+  this.tank += gas; 
+}
+
+const batMobile = new Car(
+  "Testla Model 3","20"
+);
+
+batMobile.fill(1);
+
+console.log(batMobile);
 
 /*
   TASK 3
@@ -92,10 +107,28 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(name, age, toy) {
+  //baby is using the inheritange of Person to hold the values of name and age
+  //links baby and person variables
+  Person.call(this, name, age);
+  
+  this.favoriteToy = toy;
 }
 
+// give baby blue print all of Person methods
+//this is how baby inheritages person methods
+//linking methods
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function(){
+  return `Playing with ${this.favoriteToy}`
+};
+
+const babyOne = new Baby("Royer", 2, "ball")
+
+console.log(babyOne.play())
+console.log(babyOne.toString()) 
+console.log(babyOne);
 /* 
   TASK 4
 
