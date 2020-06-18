@@ -39,9 +39,33 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person(name, age) {
+  this.name = name;
+  this.age =age;
+  this.stomach = [];
 }
+
+Person.prototype.eat = function(edible){
+  if(this.stomach.length < 10){
+    this.stomach.push(edible);
+  }
+}
+
+Person.prototype.poop = function(){
+  this.stomach = [];
+}
+
+
+Person.prototype.toString=function(){
+  return`${this.name}, ${this.age}`;
+}
+
+const personOne = new Person('Ashton', 34);
+const personTwo = new Person('Devin', 26);
+const personThree = new Person('Cora', 21);
+
+console.log(personOne.toString());
+personOne.eat('tacos');
 
 /*
   TASK 2
@@ -57,9 +81,24 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+
+Car.prototype.fill = function(gas){
+  this.tank += gas; 
+}
+
+const batMobile = new Car(
+  "Testla Model 3","20"
+);
+
+batMobile.fill(1);
+
+console.log(batMobile);
 
 /*
   TASK 3
@@ -68,18 +107,36 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(name, age, toy) {
+  //baby is using the inheritange of Person to hold the values of name and age
+  //links baby and person variables
+  Person.call(this, name, age);
+  
+  this.favoriteToy = toy;
 }
 
+// give baby blue print all of Person methods
+//this is how baby inheritages person methods
+//linking methods
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function(){
+  return `Playing with ${this.favoriteToy}`
+};
+
+const babyOne = new Baby("Royer", 2, "ball")
+
+console.log(babyOne.play())
+console.log(babyOne.toString()) 
+console.log(babyOne);
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Window/Global Object Binding: this points to windows object in global scope
+  2. Implicit Binding: the object to the left points to "this"
+  3. New binding: this points to the object is created on
+  4. Explicit binding: When I use call or apply method
 */
 
 
